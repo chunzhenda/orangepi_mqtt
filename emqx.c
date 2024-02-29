@@ -46,13 +46,13 @@ void *mqtt_publish_thread(void *arg)
         sprintf(buf, "welcome to mqttclient, this is a publish test, a rand number: %d ...", random_number());
 
         msg.qos = 0;
-        mqtt_publish(client, "topic1", &msg);
+        mqtt_publish(client, "Linux_Topic", &msg);
 
         msg.qos = 1;
-        mqtt_publish(client, "topic2", &msg);
+        mqtt_publish(client, "Linux_Topic", &msg);
 
         msg.qos = 2;
-        mqtt_publish(client, "topic3", &msg);
+        mqtt_publish(client, "Linux_Topic", &msg);
         
         sleep(4);
     }
@@ -84,17 +84,17 @@ int main(void)
     mqtt_set_port(client, "1883");
 #endif
 
-    mqtt_set_host(client, "120.25.213.14");
-    mqtt_set_client_id(client, client_id);
-    mqtt_set_user_name(client, user_name);
-    mqtt_set_password(client, password);
+    mqtt_set_host(client, "110.41.63.154");
+    mqtt_set_client_id(client, "orange_pi");
+    mqtt_set_user_name(client, "zhuoliang");
+    mqtt_set_password(client, "82868753");
     mqtt_set_clean_session(client, 1);
 
     mqtt_connect(client);
     
-    mqtt_subscribe(client, "topic1", QOS0, topic1_handler);
-    mqtt_subscribe(client, "topic2", QOS1, NULL);
-    mqtt_subscribe(client, "topic3", QOS2, NULL);
+    mqtt_subscribe(client, "ESP32_Topic", QOS0, topic1_handler);
+    mqtt_subscribe(client, "ESP32_Topic", QOS1, NULL);
+    mqtt_subscribe(client, "ESP32_Topic", QOS2, NULL);
     
     res = pthread_create(&thread1, NULL, mqtt_publish_thread, client);
     if(res != 0) {
